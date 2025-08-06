@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <title>Formulário para Diagnóstico Financeiro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- jsPDF e html2canvas para gerar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     body {
-      background: #f8fafc;
+      background: #f3f8ff;
       font-family: 'Segoe UI', Arial, sans-serif;
-      color: #24303e;
+      color: #1b2a47;
       margin: 0;
       padding: 0;
     }
@@ -16,7 +19,7 @@
       max-width: 900px;
       margin: 32px auto;
       background: #fff;
-      box-shadow: 0 4px 24px rgba(36,48,62,0.1);
+      box-shadow: 0 4px 24px rgba(30,60,120,0.10);
       border-radius: 12px;
       padding: 36px 28px 28px 28px;
     }
@@ -24,7 +27,7 @@
       text-align: center;
       margin-bottom: 0;
       font-size: 2.3em;
-      color: #117a65;
+      color: #1859c0;
       letter-spacing: 1px;
     }
     h2 {
@@ -32,32 +35,32 @@
       margin-top: 0;
       font-size: 1.3em;
       font-weight: 400;
-      color: #555;
+      color: #3477dc;
       margin-bottom: 18px;
     }
     .desc {
       font-size: 1.04em;
       margin: 0 auto 26px auto;
       text-align: center;
-      color: #57606f;
+      color: #39649c;
       max-width: 620px;
     }
     .block {
       margin: 38px auto;
-      background: #f5f8fa;
+      background: #eaf2fb;
       border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(36,48,62,0.06);
+      box-shadow: 0 1px 4px rgba(30,60,120,0.06);
       padding: 25px 20px 18px 20px;
     }
     .block-title {
       font-size: 1.25em;
       font-weight: 600;
-      color: #117a65;
+      color: #1859c0;
       margin-bottom: 1px;
     }
     .block-desc {
       font-size: 0.97em;
-      color: #57606f;
+      color: #39649c;
       margin-bottom: 14px;
     }
     table {
@@ -70,26 +73,27 @@
       text-align: left;
     }
     th {
-      background: #e8f6f3;
-      color: #117a65;
+      background: #d3e4fc;
+      color: #1a4e96;
       font-weight: 600;
       font-size: 1em;
     }
     td input[type="text"], td input[type="number"], td input[type="email"], td input[type="tel"] {
       width: 96%;
       padding: 5px;
-      border: 1px solid #b2bec3;
+      border: 1px solid #9bb4e9;
       border-radius: 5px;
       font-size: 1em;
       background: #fff;
       transition: border .2s;
+      color: #1a2e4b;
     }
     td input:focus {
-      border-color: #117a65;
+      border-color: #1859c0;
       outline: none;
     }
     .add-row-btn {
-      background: #117a65;
+      background: #1859c0;
       color: #fff;
       border: none;
       padding: 5px 14px;
@@ -100,10 +104,10 @@
       transition: background .2s;
     }
     .add-row-btn:hover {
-      background: #138d75;
+      background: #3477dc;
     }
     .remove-row-btn {
-      background: #e74c3c;
+      background: #5893e8;
       color: #fff;
       border: none;
       padding: 3px 10px;
@@ -114,12 +118,17 @@
       transition: background .2s;
     }
     .remove-row-btn:hover {
-      background: #c0392b;
+      background: #1859c0;
     }
     .total-row {
       font-weight: 600;
-      color: #117a65;
-      background: #e8f6f3;
+      color: #1859c0;
+      background: #d3e4fc;
+      border-radius: 4px;
+      padding-left: 8px;
+      margin-bottom: 4px;
+      margin-top: 8px;
+      display: inline-block;
     }
     .section {
       margin-bottom: 16px;
@@ -128,27 +137,28 @@
       display: block;
       margin-bottom: 5px;
       font-weight: 500;
-      color: #117a65;
+      color: #1859c0;
     }
     .section input, .section select, .section textarea {
       width: 98%;
       padding: 7px;
       border-radius: 4px;
-      border: 1px solid #b2bec3;
+      border: 1px solid #9bb4e9;
       font-size: 1em;
       background: #fff;
       margin-bottom: 12px;
+      color: #1b2a47;
       transition: border .2s;
     }
     .section input:focus, .section select:focus, .section textarea:focus {
-      border-color: #117a65;
+      border-color: #1859c0;
       outline: none;
     }
     .submit-btn {
       display: block;
       width: 100%;
       padding: 15px;
-      background: #117a65;
+      background: #1859c0;
       color: #fff;
       font-size: 1.2em;
       font-weight: 600;
@@ -160,24 +170,24 @@
       letter-spacing: .5px;
     }
     .submit-btn:hover {
-      background: #138d75;
+      background: #3477dc;
     }
     .resultado-block {
       margin: 36px 0 0 0;
-      background: #e8f6f3;
+      background: #d3e4fc;
       border-radius: 8px;
       padding: 24px 20px;
-      box-shadow: 0 1px 4px rgba(36,48,62,0.08);
+      box-shadow: 0 1px 4px rgba(30,60,120,0.08);
     }
     .resultado-title {
       font-size: 1.18em;
       font-weight: 600;
-      color: #117a65;
+      color: #1859c0;
       margin-bottom: 12px;
     }
     .resultado-list {
       font-size: 1em;
-      color: #24303e;
+      color: #1b2a47;
       margin-left: 16px;
       line-height: 1.8;
     }
@@ -188,7 +198,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="form-container">
     <h1>Formulário para Diagnóstico Financeiro</h1>
     <h2>O Mão de Vaka</h2>
     <div class="desc">
@@ -223,7 +233,6 @@
         </table>
       </div>
 
-      <!-- Função para blocos dinâmicos -->
       <script>
         function addRow(tableId, itemPlaceholder = "Outro item", valuePlaceholder = "Valor") {
           const table = document.getElementById(tableId);
@@ -237,7 +246,7 @@
           btn.closest('tr').remove();
         }
       </script>
-      <!-- Blocos dinâmicos de receita/despesa -->
+      <!-- Bloco Renda -->
       <div class="block" id="bloco-renda">
         <div class="block-title">Informações de Renda</div>
         <div class="block-desc">Informe suas principais fontes de receita.</div>
@@ -252,14 +261,15 @@
         <div class="total-row">Total: R$ <span id="total-renda">0,00</span></div>
       </div>
 
-      <div class="block" id="bloco-despesas-casa">
+      <!-- Bloco Casa -->
+      <div class="block" id="bloco-casa">
         <div class="block-title">Despesas de Casa</div>
         <div class="block-desc">Liste as despesas fixas da casa.</div>
         <table id="casa-table">
           <tr><th>Item</th><th>Valor (R$)</th></tr>
           <tr><td>Aluguel</td><td><input name="aluguel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Condomínio</td><td><input name="condominio" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
-          <tr><td>Prestação do Imóvel</td><td><input name="prestacao_imovel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Prestação do Imóvel (Financiamento)</td><td><input name="prestacao_imovel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>IPTU</td><td><input name="iptu" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Energia Elétrica</td><td><input name="energia" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Água/Esgoto</td><td><input name="agua_esgoto" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
@@ -271,7 +281,6 @@
         <div class="total-row">Total: R$ <span id="total-casa">0,00</span></div>
       </div>
 
-      <!-- Demais blocos: Alimentação, Prestadores de Serviço, Tarifas etc. (Estrutura igual) -->
       <!-- Bloco Alimentação -->
       <div class="block" id="bloco-alimentacao">
         <div class="block-title">Alimentação</div>
@@ -287,7 +296,7 @@
         <div class="total-row">Total: R$ <span id="total-alimentacao">0,00</span></div>
       </div>
 
-      <!-- Prestadores de Serviço -->
+      <!-- Bloco Prestadores de Serviço -->
       <div class="block" id="bloco-prestadores">
         <div class="block-title">Prestadores de Serviço</div>
         <div class="block-desc">Insira os gastos com prestadores de serviço.</div>
@@ -302,7 +311,7 @@
         <div class="total-row">Total: R$ <span id="total-prestadores">0,00</span></div>
       </div>
 
-      <!-- Tarifas -->
+      <!-- Bloco Tarifas -->
       <div class="block" id="bloco-tarifas">
         <div class="block-title">Tarifas</div>
         <div class="block-desc">Informe tarifas bancárias e anuidades.</div>
@@ -315,7 +324,7 @@
         <div class="total-row">Total: R$ <span id="total-tarifas">0,00</span></div>
       </div>
 
-      <!-- Ensino -->
+      <!-- Bloco Ensino -->
       <div class="block" id="bloco-ensino">
         <div class="block-title">Despesas com Ensino</div>
         <div class="block-desc">Informe gastos relacionados à educação.</div>
@@ -329,7 +338,7 @@
         <div class="total-row">Total: R$ <span id="total-ensino">0,00</span></div>
       </div>
 
-      <!-- Saúde -->
+      <!-- Bloco Saúde -->
       <div class="block" id="bloco-saude">
         <div class="block-title">Despesas Médicas e Saúde</div>
         <div class="block-desc">Gastos com saúde e medicamentos.</div>
@@ -344,7 +353,7 @@
         <div class="total-row">Total: R$ <span id="total-saude">0,00</span></div>
       </div>
 
-      <!-- Assinaturas e Aplicativos -->
+      <!-- Bloco Assinaturas e Aplicativos -->
       <div class="block" id="bloco-assinaturas">
         <div class="block-title">Assinaturas e Aplicativos</div>
         <div class="block-desc">Gastos com TV, streaming e apps.</div>
@@ -361,7 +370,7 @@
         <div class="total-row">Total: R$ <span id="total-assinaturas">0,00</span></div>
       </div>
 
-      <!-- Doações -->
+      <!-- Bloco Doações -->
       <div class="block" id="bloco-doacoes">
         <div class="block-title">Doações</div>
         <div class="block-desc">Gastos com doações, presentes, dízimos.</div>
@@ -375,8 +384,8 @@
         <div class="total-row">Total: R$ <span id="total-doacoes">0,00</span></div>
       </div>
 
-      <!-- Atividade Física -->
-      <div class="block" id="bloco-atividade-fisica">
+      <!-- Bloco Atividade Física -->
+      <div class="block" id="bloco-atividade">
         <div class="block-title">Atividade Física</div>
         <div class="block-desc">Gastos com atividades físicas.</div>
         <table id="atividade-table">
@@ -389,7 +398,7 @@
         <div class="total-row">Total: R$ <span id="total-atividade">0,00</span></div>
       </div>
 
-      <!-- Transporte/Veículo -->
+      <!-- Bloco Transporte/Veículo -->
       <div class="block" id="bloco-transporte">
         <div class="block-title">Despesas com Transporte/Veículo</div>
         <div class="block-desc">Informe seus gastos com transporte e veículos.</div>
@@ -448,7 +457,7 @@
       </div>
 
       <!-- Outras Despesas -->
-      <div class="block" id="bloco-outras-despesas">
+      <div class="block" id="bloco-outras">
         <div class="block-title">Outras Despesas</div>
         <div class="block-desc">Informe gastos diversos não listados acima.</div>
         <table id="outras-table">
@@ -528,12 +537,11 @@
         <div class="resultado-list" id="resumo-financeiro"></div>
       </div>
 
-      <button type="submit" class="submit-btn">Enviar Respostas</button>
+      <button type="button" class="submit-btn" id="gerarPDFbtn">Gerar PDF para Download</button>
     </form>
   </div>
 
   <script>
-    // Função de soma automática dos blocos
     function updateTotal(tableId) {
       const table = document.getElementById(tableId);
       let total = 0;
@@ -555,39 +563,33 @@
       document.getElementById('total-dividas-parcelas').innerText = parcelas.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
-    // Blocos que devem ser somados para despesa e receita
     const blocosReceita = ['renda-table'];
     const blocosDespesa = [
       'casa-table','alimentacao-table','prestadores-table','tarifas-table','ensino-table','saude-table','assinaturas-table',
       'doacoes-table','atividade-table','transporte-table','beleza-table','outras-table'
     ];
 
-    // Atualiza todos os totais ao carregar
     window.onload = function() {
       blocosReceita.concat(blocosDespesa).forEach(updateTotal);
       updateTotalDividas();
     };
 
-    // Exibe bloco resultado financeiro ao enviar formulário
-    document.getElementById('diagnosticoForm').addEventListener('submit', function(event) {
+    document.getElementById('gerarPDFbtn').addEventListener('click', function(event) {
       event.preventDefault();
       mostrarResumo();
-      enviarParaGoogleSheets();
+      gerarPDF();
     });
 
     function mostrarResumo() {
-      // Soma receitas e despesas
       let totalReceitas = 0, totalDespesas = 0, resumo = '';
       blocosReceita.forEach(b=>{totalReceitas += parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.')) || 0;});
       blocosDespesa.forEach(b=>{totalDespesas += parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.')) || 0;});
-      // Dívidas mensais
       const dividasMensais = parseFloat(document.getElementById('total-dividas-parcelas').innerText.replace('.','').replace(',','.')) || 0;
       totalDespesas += dividasMensais;
 
       resumo += `<b>Receitas:</b> R$ ${totalReceitas.toLocaleString('pt-BR',{minimumFractionDigits:2})}<br>`;
       resumo += `<b>Despesas:</b> R$ ${totalDespesas.toLocaleString('pt-BR',{minimumFractionDigits:2})}<br>`;
-      resumo += `<b>Saldo Mensal:</b> <span style="color:${totalReceitas-totalDespesas>=0?'#117a65':'#e74c3c'}">R$ ${(totalReceitas-totalDespesas).toLocaleString('pt-BR',{minimumFractionDigits:2})}</span><br><br>`;
-      // Detalhes por bloco
+      resumo += `<b>Saldo Mensal:</b> <span style="color:${totalReceitas-totalDespesas>=0?'#1859c0':'#e74c3c'}">R$ ${(totalReceitas-totalDespesas).toLocaleString('pt-BR',{minimumFractionDigits:2})}</span><br><br>`;
       resumo += "<b>Detalhamento por bloco:</b><br>";
       blocosReceita.forEach(b=>{
         const nome = document.querySelector(`#bloco-renda .block-title`).innerText;
@@ -606,46 +608,33 @@
       window.scrollTo({top:document.getElementById('resultado-financeiro').offsetTop-80, behavior:'smooth'});
     }
 
-    // Envia dados para Google Sheets via Google Apps Script
-    function enviarParaGoogleSheets() {
-      // Coleta todos os campos do formulário
-      const form = document.getElementById("diagnosticoForm");
-      const dados = new FormData(form);
+    function gerarPDF() {
+      document.getElementById('gerarPDFbtn').style.display = 'none';
+      document.getElementById('resultado-financeiro').style.display = '';
+      html2canvas(document.getElementById('form-container'), {scale:2}).then(function(canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new window.jspdf.jsPDF('p','mm','a4');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const imgProps = pdf.getImageProperties(imgData);
+        let pdfWidth = pageWidth;
+        let pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-      // Adiciona os totais de cada bloco e saldo final
-      blocosReceita.concat(blocosDespesa).forEach(b=>{
-        dados.append('total_' + b.replace('-table',''), document.getElementById('total-' + b.replace('-table','')).innerText);
-      });
-      dados.append('total_receitas', document.getElementById('total-renda').innerText);
-      dados.append('total_despesas', (
-        blocosDespesa.reduce((soma,b)=>soma+(parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.'))||0),0)
-        + (parseFloat(document.getElementById('total-dividas-parcelas').innerText.replace('.','').replace(',','.'))||0)
-      ).toLocaleString('pt-BR',{minimumFractionDigits:2}));
-      dados.append('saldo_mensal', (
-        parseFloat(document.getElementById('total-renda').innerText.replace('.','').replace(',','.'))
-        - (
-          blocosDespesa.reduce((soma,b)=>soma+(parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.'))||0),0)
-          + (parseFloat(document.getElementById('total-dividas-parcelas').innerText.replace('.','').replace(',','.'))||0)
-        )
-      ).toLocaleString('pt-BR',{minimumFractionDigits:2}));
-      dados.append('dividas_mensais', document.getElementById('total-dividas-parcelas').innerText);
+        let heightLeft = pdfHeight;
+        let position = 0;
 
-      // Envia via fetch
-      fetch('https://script.google.com/macros/s/AKfycbyDS6vCA_bqmzKoSoUgPLcY1EMbQHel__BcBZC-NDdq9h1SCcZMpsvjZlS6febkeTWx/exec', {
-        method: 'POST',
-        body: dados
-      })
-      .then(response => response.json())
-      .then(data => {
-        if(data.result === "success") {
-          alert("Respostas enviadas com sucesso!");
-          document.getElementById("diagnosticoForm").reset();
-        } else {
-          alert("Erro ao enviar respostas. Tente novamente.");
+        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft > 0) {
+          position = heightLeft - pdfHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+          heightLeft -= pageHeight;
         }
-      })
-      .catch(error => {
-        alert("Falha ao enviar respostas. Verifique sua conexão.");
+
+        pdf.save('diagnostico-financeiro.pdf');
+        document.getElementById('gerarPDFbtn').style.display = '';
       });
     }
   </script>
