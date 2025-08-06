@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário para Diagnóstico Financeiro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f8fafc;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #24303e;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(36,48,62,0.1);
+      border-radius: 12px;
+      padding: 36px 28px 28px 28px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 0;
+      font-size: 2.3em;
+      color: #117a65;
+      letter-spacing: 1px;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      font-size: 1.3em;
+      font-weight: 400;
+      color: #555;
+      margin-bottom: 18px;
+    }
+    .desc {
+      font-size: 1.04em;
+      margin: 0 auto 26px auto;
+      text-align: center;
+      color: #57606f;
+      max-width: 620px;
+    }
+    .block {
+      margin: 38px auto;
+      background: #f5f8fa;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(36,48,62,0.06);
+      padding: 25px 20px 18px 20px;
+    }
+    .block-title {
+      font-size: 1.25em;
+      font-weight: 600;
+      color: #117a65;
+      margin-bottom: 1px;
+    }
+    .block-desc {
+      font-size: 0.97em;
+      color: #57606f;
+      margin-bottom: 14px;
+    }
+    table {
+      width: 100%;
+      border-spacing: 0;
+      margin-bottom: 10px;
+    }
+    th, td {
+      padding: 8px 5px;
+      text-align: left;
+    }
+    th {
+      background: #e8f6f3;
+      color: #117a65;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    td input[type="text"], td input[type="number"], td input[type="email"], td input[type="tel"] {
+      width: 96%;
+      padding: 5px;
+      border: 1px solid #b2bec3;
+      border-radius: 5px;
+      font-size: 1em;
+      background: #fff;
+      transition: border .2s;
+    }
+    td input:focus {
+      border-color: #117a65;
+      outline: none;
+    }
+    .add-row-btn {
+      background: #117a65;
+      color: #fff;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 5px;
+      font-size: 0.97em;
+      margin: 8px 0 6px 0;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .add-row-btn:hover {
+      background: #138d75;
+    }
+    .remove-row-btn {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.92em;
+      margin-left: 8px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .remove-row-btn:hover {
+      background: #c0392b;
+    }
+    .total-row {
+      font-weight: 600;
+      color: #117a65;
+      background: #e8f6f3;
+    }
+    .section {
+      margin-bottom: 16px;
+    }
+    .section label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #117a65;
+    }
+    .section input, .section select, .section textarea {
+      width: 98%;
+      padding: 7px;
+      border-radius: 4px;
+      border: 1px solid #b2bec3;
+      font-size: 1em;
+      background: #fff;
+      margin-bottom: 12px;
+      transition: border .2s;
+    }
+    .section input:focus, .section select:focus, .section textarea:focus {
+      border-color: #117a65;
+      outline: none;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #117a65;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 600;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      margin: 28px 0 0 0;
+      transition: background .2s;
+      letter-spacing: .5px;
+    }
+    .submit-btn:hover {
+      background: #138d75;
+    }
+    .resultado-block {
+      margin: 36px 0 0 0;
+      background: #e8f6f3;
+      border-radius: 8px;
+      padding: 24px 20px;
+      box-shadow: 0 1px 4px rgba(36,48,62,0.08);
+    }
+    .resultado-title {
+      font-size: 1.18em;
+      font-weight: 600;
+      color: #117a65;
+      margin-bottom: 12px;
+    }
+    .resultado-list {
+      font-size: 1em;
+      color: #24303e;
+      margin-left: 16px;
+      line-height: 1.8;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 14px 3vw; }
+      table, th, td { font-size: .99em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Formulário para Diagnóstico Financeiro</h1>
+    <h2>O Mão de Vaka</h2>
+    <div class="desc">
+      Este formulário tem como objetivo coletar informações sobre suas receitas e despesas para que possamos oferecer um diagnóstico financeiro personalizado e te ajudar a organizar suas finanças. Fique tranquilo, seus dados estarão seguros e serão utilizados apenas para essa análise. Levamos o sigilo das suas informações muito a sério. Seja honesto e preciso em suas respostas. O resultado final dependerá diretamente dessas informações.
+    </div>
+    <form id="diagnosticoForm" autocomplete="on">
+      <div class="block" id="bloco-pessoal">
+        <div class="block-title">Informações Pessoais</div>
+        <div class="block-desc">Forneça suas informações básicas para começar.</div>
+        <table>
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr>
+            <td>Nome</td>
+            <td><input name="nome" type="text" required></td>
+          </tr>
+          <tr>
+            <td>Número de Pessoas na Família</td>
+            <td><input name="familia" type="number" min="1" required></td>
+          </tr>
+          <tr>
+            <td>Cidade/UF</td>
+            <td><input name="cidade" type="text" required></td>
+          </tr>
+          <tr>
+            <td>E-mail</td>
+            <td><input name="email" type="email" required></td>
+          </tr>
+          <tr>
+            <td>Telefone</td>
+            <td><input name="telefone" type="tel" required></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Função para blocos dinâmicos -->
+      <script>
+        function addRow(tableId, itemPlaceholder = "Outro item", valuePlaceholder = "Valor") {
+          const table = document.getElementById(tableId);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td><input type="text" placeholder="${itemPlaceholder}" name="${tableId}_item[]" required></td>
+            <td><input type="number" min="0" step="0.01" placeholder="${valuePlaceholder}" name="${tableId}_valor[]" class="valor-input" oninput="updateTotal('${tableId}')" required>
+            <button type="button" class="remove-row-btn" onclick="removeRow(this)">Remover</button></td>`;
+          table.appendChild(tr);
+        }
+        function removeRow(btn) {
+          btn.closest('tr').remove();
+        }
+      </script>
+      <!-- Blocos dinâmicos de receita/despesa -->
+      <div class="block" id="bloco-renda">
+        <div class="block-title">Informações de Renda</div>
+        <div class="block-desc">Informe suas principais fontes de receita.</div>
+        <table id="renda-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Salário/Renda Principal</td><td><input name="renda_principal" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('renda-table')" required></td></tr>
+          <tr><td>Renda Extra (vendas, serviços, etc.)</td><td><input name="renda_extra" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('renda-table')" required></td></tr>
+          <tr><td>Benefícios Sociais</td><td><input name="beneficios_sociais" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('renda-table')" required></td></tr>
+          <tr><td>Outras Receitas (aluguel, pensão, etc.)</td><td><input name="outras_receitas" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('renda-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('renda-table')">+ Adicionar Receita</button>
+        <div class="total-row">Total: R$ <span id="total-renda">0,00</span></div>
+      </div>
+
+      <div class="block" id="bloco-despesas-casa">
+        <div class="block-title">Despesas de Casa</div>
+        <div class="block-desc">Liste as despesas fixas da casa.</div>
+        <table id="casa-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Aluguel</td><td><input name="aluguel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Condomínio</td><td><input name="condominio" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Prestação do Imóvel</td><td><input name="prestacao_imovel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>IPTU</td><td><input name="iptu" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Energia Elétrica</td><td><input name="energia" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Água/Esgoto</td><td><input name="agua_esgoto" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Celular/Telefone fixo</td><td><input name="telefone_fixo" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Gás</td><td><input name="gas" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Internet</td><td><input name="internet" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('casa-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-casa">0,00</span></div>
+      </div>
+
+      <!-- Demais blocos: Alimentação, Prestadores de Serviço, Tarifas etc. (Estrutura igual) -->
+      <!-- Bloco Alimentação -->
+      <div class="block" id="bloco-alimentacao">
+        <div class="block-title">Alimentação</div>
+        <div class="block-desc">Informe seus gastos com alimentação.</div>
+        <table id="alimentacao-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Mercado</td><td><input name="mercado" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('alimentacao-table')" required></td></tr>
+          <tr><td>Padaria</td><td><input name="padaria" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('alimentacao-table')" required></td></tr>
+          <tr><td>Feira</td><td><input name="feira" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('alimentacao-table')" required></td></tr>
+          <tr><td>Lanches/Refeições Fora de Casa</td><td><input name="lanches_fora" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('alimentacao-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('alimentacao-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-alimentacao">0,00</span></div>
+      </div>
+
+      <!-- Prestadores de Serviço -->
+      <div class="block" id="bloco-prestadores">
+        <div class="block-title">Prestadores de Serviço</div>
+        <div class="block-desc">Insira os gastos com prestadores de serviço.</div>
+        <table id="prestadores-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Diarista</td><td><input name="diarista" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('prestadores-table')" required></td></tr>
+          <tr><td>Empregada Doméstica</td><td><input name="empregada" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('prestadores-table')" required></td></tr>
+          <tr><td>Jardineiro</td><td><input name="jardineiro" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('prestadores-table')" required></td></tr>
+          <tr><td>Manutenção</td><td><input name="manutencao" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('prestadores-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('prestadores-table')">+ Adicionar Serviço</button>
+        <div class="total-row">Total: R$ <span id="total-prestadores">0,00</span></div>
+      </div>
+
+      <!-- Tarifas -->
+      <div class="block" id="bloco-tarifas">
+        <div class="block-title">Tarifas</div>
+        <div class="block-desc">Informe tarifas bancárias e anuidades.</div>
+        <table id="tarifas-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Anuidade do Cartão de Crédito</td><td><input name="anuidade_cartao" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('tarifas-table')" required></td></tr>
+          <tr><td>Tarifa Bancária</td><td><input name="tarifa_bancaria" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('tarifas-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('tarifas-table')">+ Adicionar Tarifa</button>
+        <div class="total-row">Total: R$ <span id="total-tarifas">0,00</span></div>
+      </div>
+
+      <!-- Ensino -->
+      <div class="block" id="bloco-ensino">
+        <div class="block-title">Despesas com Ensino</div>
+        <div class="block-desc">Informe gastos relacionados à educação.</div>
+        <table id="ensino-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Mensalidade</td><td><input name="mensalidade" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('ensino-table')" required></td></tr>
+          <tr><td>Cursos</td><td><input name="cursos" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('ensino-table')" required></td></tr>
+          <tr><td>Material Escolar</td><td><input name="material_escolar" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('ensino-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('ensino-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-ensino">0,00</span></div>
+      </div>
+
+      <!-- Saúde -->
+      <div class="block" id="bloco-saude">
+        <div class="block-title">Despesas Médicas e Saúde</div>
+        <div class="block-desc">Gastos com saúde e medicamentos.</div>
+        <table id="saude-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Plano de Saúde/Dental</td><td><input name="plano_saude" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('saude-table')" required></td></tr>
+          <tr><td>Medicamentos</td><td><input name="medicamentos" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('saude-table')" required></td></tr>
+          <tr><td>Terapias/Fisioterapia</td><td><input name="terapias" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('saude-table')" required></td></tr>
+          <tr><td>Exames</td><td><input name="exames" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('saude-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('saude-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-saude">0,00</span></div>
+      </div>
+
+      <!-- Assinaturas e Aplicativos -->
+      <div class="block" id="bloco-assinaturas">
+        <div class="block-title">Assinaturas e Aplicativos</div>
+        <div class="block-desc">Gastos com TV, streaming e apps.</div>
+        <table id="assinaturas-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>TV por Assinatura</td><td><input name="tv_assinatura" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+          <tr><td>Netflix</td><td><input name="netflix" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+          <tr><td>Amazon Prime</td><td><input name="amazon_prime" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+          <tr><td>Disney+</td><td><input name="disney" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+          <tr><td>Globoplay</td><td><input name="globoplay" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+          <tr><td>Spotify/Apple/Amazon/YouTube/Deezer</td><td><input name="musica_streaming" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('assinaturas-table')">+ Adicionar Assinatura</button>
+        <div class="total-row">Total: R$ <span id="total-assinaturas">0,00</span></div>
+      </div>
+
+      <!-- Doações -->
+      <div class="block" id="bloco-doacoes">
+        <div class="block-title">Doações</div>
+        <div class="block-desc">Gastos com doações, presentes, dízimos.</div>
+        <table id="doacoes-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Presentes</td><td><input name="presentes" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('doacoes-table')" required></td></tr>
+          <tr><td>Doações</td><td><input name="doacoes" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('doacoes-table')" required></td></tr>
+          <tr><td>Dízimo/Ofertas</td><td><input name="dizimo" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('doacoes-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('doacoes-table')">+ Adicionar Item</button>
+        <div class="total-row">Total: R$ <span id="total-doacoes">0,00</span></div>
+      </div>
+
+      <!-- Atividade Física -->
+      <div class="block" id="bloco-atividade-fisica">
+        <div class="block-title">Atividade Física</div>
+        <div class="block-desc">Gastos com atividades físicas.</div>
+        <table id="atividade-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Academia/Funcional/Crosfit/Lutas</td><td><input name="academia" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
+          <tr><td>Personal</td><td><input name="personal" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
+          <tr><td>Pilates</td><td><input name="pilates" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('atividade-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-atividade">0,00</span></div>
+      </div>
+
+      <!-- Transporte/Veículo -->
+      <div class="block" id="bloco-transporte">
+        <div class="block-title">Despesas com Transporte/Veículo</div>
+        <div class="block-desc">Informe seus gastos com transporte e veículos.</div>
+        <table id="transporte-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Combustível</td><td><input name="combustivel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+          <tr><td>Manutenção</td><td><input name="manutencao_veiculo" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+          <tr><td>Estacionamento</td><td><input name="estacionamento" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+          <tr><td>Seguros Automóvel</td><td><input name="seguro_automovel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+          <tr><td>IPVA</td><td><input name="ipva" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+          <tr><td>Licenciamento Anual</td><td><input name="licenciamento" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+          <tr><td>Transporte Público (Ônibus/Metrô/Trem...)</td><td><input name="transporte_publico" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('transporte-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('transporte-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-transporte">0,00</span></div>
+      </div>
+
+      <!-- Informações de Dívidas -->
+      <div class="block" id="bloco-dividas">
+        <div class="block-title">Informações de Dívidas</div>
+        <div class="block-desc">Informe detalhes das suas dívidas (até 3).</div>
+        <table>
+          <tr><th>Tipo</th><th>Valor Total (R$)</th><th>Valor Parcela Mensal (R$)</th></tr>
+          <tr>
+            <td><input name="divida_tipo_1" type="text" placeholder="Ex: Empréstimo"></td>
+            <td><input name="divida_valor_total_1" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+            <td><input name="divida_parcela_1" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+          </tr>
+          <tr>
+            <td><input name="divida_tipo_2" type="text" placeholder="Ex: Cartão de Crédito"></td>
+            <td><input name="divida_valor_total_2" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+            <td><input name="divida_parcela_2" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+          </tr>
+          <tr>
+            <td><input name="divida_tipo_3" type="text" placeholder="Ex: Consignado"></td>
+            <td><input name="divida_valor_total_3" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+            <td><input name="divida_parcela_3" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+          </tr>
+        </table>
+        <div class="total-row">Total Dívidas: R$ <span id="total-dividas">0,00</span> | Parcelas Mensais: R$ <span id="total-dividas-parcelas">0,00</span></div>
+      </div>
+
+      <!-- Despesas com Beleza -->
+      <div class="block" id="bloco-beleza">
+        <div class="block-title">Despesas com Beleza</div>
+        <div class="block-desc">Gastos com beleza e cuidados pessoais.</div>
+        <table id="beleza-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Procedimento Estético</td><td><input name="procedimento_estetico" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('beleza-table')" required></td></tr>
+          <tr><td>Manicure</td><td><input name="manicure" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('beleza-table')" required></td></tr>
+          <tr><td>Cabelereiro/Barbeiro</td><td><input name="cabelereiro" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('beleza-table')" required></td></tr>
+          <tr><td>Depilação</td><td><input name="depilacao" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('beleza-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('beleza-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-beleza">0,00</span></div>
+      </div>
+
+      <!-- Outras Despesas -->
+      <div class="block" id="bloco-outras-despesas">
+        <div class="block-title">Outras Despesas</div>
+        <div class="block-desc">Informe gastos diversos não listados acima.</div>
+        <table id="outras-table">
+          <tr><th>Item</th><th>Valor (R$)</th></tr>
+          <tr><td>Lazer/Entretenimento</td><td><input name="lazer" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('outras-table')" required></td></tr>
+          <tr><td>Seguro Pessoal (Vida/Funeral/Outro)</td><td><input name="seguro_pessoal" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('outras-table')" required></td></tr>
+          <tr><td>Despesas com Pet</td><td><input name="pet" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('outras-table')" required></td></tr>
+          <tr><td>Vestuário</td><td><input name="vestuario" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('outras-table')" required></td></tr>
+        </table>
+        <button type="button" class="add-row-btn" onclick="addRow('outras-table')">+ Adicionar Despesa</button>
+        <div class="total-row">Total: R$ <span id="total-outras">0,00</span></div>
+      </div>
+
+      <!-- Reservas e Economia -->
+      <div class="block" id="bloco-reservas">
+        <div class="block-title">Reservas e Economia</div>
+        <div class="block-desc">Informe sobre sua reserva financeira.</div>
+        <div class="section">
+          <label>Possui Reserva de Emergência?</label>
+          <select name="reserva_emergencia" required>
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+        <div class="section">
+          <label>Qual aplicação?</label>
+          <input name="reserva_aplicacao" type="text">
+        </div>
+        <div class="section">
+          <label>Qual o valor total da sua reserva?</label>
+          <input name="reserva_valor" type="number" min="0" step="0.01">
+        </div>
+        <div class="section">
+          <label>Quanto acredita que poderia economizar por mês para criar uma reserva?</label>
+          <input name="reserva_economia_mes" type="number" min="0" step="0.01">
+        </div>
+      </div>
+
+      <!-- Metas -->
+      <div class="block" id="bloco-metas">
+        <div class="block-title">Metas</div>
+        <div class="block-desc">Descreva seus objetivos financeiros.</div>
+        <div class="section">
+          <label>Tem algum objetivo financeiro de curto prazo (ex: quitar uma dívida, fazer uma compra)? Qual?</label>
+          <textarea name="meta_curto_prazo" rows="2"></textarea>
+        </div>
+        <div class="section">
+          <label>Tem algum objetivo financeiro de longo prazo (ex: comprar uma casa, se aposentar)? Qual?</label>
+          <textarea name="meta_longo_prazo" rows="2"></textarea>
+        </div>
+      </div>
+      <!-- Avaliação -->
+      <div class="block" id="bloco-avaliacao">
+        <div class="block-title">Avaliação</div>
+        <div class="block-desc">Como está sua situação financeira?</div>
+        <div class="section">
+          <label>Como você avalia sua situação financeira atual?</label>
+          <select name="avaliacao_financeira" required>
+            <option value="">Selecione</option>
+            <option value="Muito ruim">Muito ruim</option>
+            <option value="Ruim">Ruim</option>
+            <option value="Regular">Regular</option>
+            <option value="Boa">Boa</option>
+            <option value="Muito boa">Muito boa</option>
+          </select>
+        </div>
+        <div class="section">
+          <label>Gostaria de adicionar mais algum comentário ou informação relevante?</label>
+          <textarea name="comentario" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- Resultado Financeiro -->
+      <div class="resultado-block" id="resultado-financeiro" style="display:none">
+        <div class="resultado-title">Resultado Financeiro</div>
+        <div class="resultado-list" id="resumo-financeiro"></div>
+      </div>
+
+      <button type="submit" class="submit-btn">Enviar Respostas</button>
+    </form>
+  </div>
+
+  <script>
+    // Função de soma automática dos blocos
+    function updateTotal(tableId) {
+      const table = document.getElementById(tableId);
+      let total = 0;
+      if (!table) return;
+      const inputs = table.querySelectorAll('input[type="number"]');
+      inputs.forEach(inp => {
+        if (inp.value) total += parseFloat(inp.value.replace(',', '.')) || 0;
+      });
+      document.getElementById('total-' + tableId.replace('-table', '')).innerText = total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+    }
+
+    function updateTotalDividas() {
+      let total = 0, parcelas = 0;
+      for(let i=1;i<=3;i++) {
+        total += parseFloat(document.querySelector(`[name=divida_valor_total_${i}]`).value.replace(',','.') || 0);
+        parcelas += parseFloat(document.querySelector(`[name=divida_parcela_${i}]`).value.replace(',','.') || 0);
+      }
+      document.getElementById('total-dividas').innerText = total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+      document.getElementById('total-dividas-parcelas').innerText = parcelas.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+    }
+
+    // Blocos que devem ser somados para despesa e receita
+    const blocosReceita = ['renda-table'];
+    const blocosDespesa = [
+      'casa-table','alimentacao-table','prestadores-table','tarifas-table','ensino-table','saude-table','assinaturas-table',
+      'doacoes-table','atividade-table','transporte-table','beleza-table','outras-table'
+    ];
+
+    // Atualiza todos os totais ao carregar
+    window.onload = function() {
+      blocosReceita.concat(blocosDespesa).forEach(updateTotal);
+      updateTotalDividas();
+    };
+
+    // Exibe bloco resultado financeiro ao enviar formulário
+    document.getElementById('diagnosticoForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      mostrarResumo();
+      enviarParaGoogleSheets();
+    });
+
+    function mostrarResumo() {
+      // Soma receitas e despesas
+      let totalReceitas = 0, totalDespesas = 0, resumo = '';
+      blocosReceita.forEach(b=>{totalReceitas += parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.')) || 0;});
+      blocosDespesa.forEach(b=>{totalDespesas += parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.')) || 0;});
+      // Dívidas mensais
+      const dividasMensais = parseFloat(document.getElementById('total-dividas-parcelas').innerText.replace('.','').replace(',','.')) || 0;
+      totalDespesas += dividasMensais;
+
+      resumo += `<b>Receitas:</b> R$ ${totalReceitas.toLocaleString('pt-BR',{minimumFractionDigits:2})}<br>`;
+      resumo += `<b>Despesas:</b> R$ ${totalDespesas.toLocaleString('pt-BR',{minimumFractionDigits:2})}<br>`;
+      resumo += `<b>Saldo Mensal:</b> <span style="color:${totalReceitas-totalDespesas>=0?'#117a65':'#e74c3c'}">R$ ${(totalReceitas-totalDespesas).toLocaleString('pt-BR',{minimumFractionDigits:2})}</span><br><br>`;
+      // Detalhes por bloco
+      resumo += "<b>Detalhamento por bloco:</b><br>";
+      blocosReceita.forEach(b=>{
+        const nome = document.querySelector(`#bloco-renda .block-title`).innerText;
+        const v = document.getElementById('total-' + b.replace('-table','')).innerText;
+        resumo += `${nome}: R$ ${v}<br>`;
+      });
+      blocosDespesa.forEach(b=>{
+        const nome = document.querySelector(`#bloco-${b.replace('-table','')} .block-title`).innerText;
+        const v = document.getElementById('total-' + b.replace('-table','')).innerText;
+        resumo += `${nome}: R$ ${v}<br>`;
+      });
+      resumo += `Dívidas (Parcelas Mensais): R$ ${document.getElementById('total-dividas-parcelas').innerText}<br>`;
+
+      document.getElementById('resultado-financeiro').style.display = '';
+      document.getElementById('resumo-financeiro').innerHTML = resumo;
+      window.scrollTo({top:document.getElementById('resultado-financeiro').offsetTop-80, behavior:'smooth'});
+    }
+
+    // Envia dados para Google Sheets via Google Apps Script
+    function enviarParaGoogleSheets() {
+      // Coleta todos os campos do formulário
+      const form = document.getElementById("diagnosticoForm");
+      const dados = new FormData(form);
+
+      // Adiciona os totais de cada bloco e saldo final
+      blocosReceita.concat(blocosDespesa).forEach(b=>{
+        dados.append('total_' + b.replace('-table',''), document.getElementById('total-' + b.replace('-table','')).innerText);
+      });
+      dados.append('total_receitas', document.getElementById('total-renda').innerText);
+      dados.append('total_despesas', (
+        blocosDespesa.reduce((soma,b)=>soma+(parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.'))||0),0)
+        + (parseFloat(document.getElementById('total-dividas-parcelas').innerText.replace('.','').replace(',','.'))||0)
+      ).toLocaleString('pt-BR',{minimumFractionDigits:2}));
+      dados.append('saldo_mensal', (
+        parseFloat(document.getElementById('total-renda').innerText.replace('.','').replace(',','.'))
+        - (
+          blocosDespesa.reduce((soma,b)=>soma+(parseFloat(document.getElementById('total-' + b.replace('-table','')).innerText.replace('.','').replace(',','.'))||0),0)
+          + (parseFloat(document.getElementById('total-dividas-parcelas').innerText.replace('.','').replace(',','.'))||0)
+        )
+      ).toLocaleString('pt-BR',{minimumFractionDigits:2}));
+      dados.append('dividas_mensais', document.getElementById('total-dividas-parcelas').innerText);
+
+      // Envia via fetch
+      fetch('https://script.google.com/macros/s/AKfycbyDS6vCA_bqmzKoSoUgPLcY1EMbQHel__BcBZC-NDdq9h1SCcZMpsvjZlS6febkeTWx/exec', {
+        method: 'POST',
+        body: dados
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.result === "success") {
+          alert("Respostas enviadas com sucesso!");
+          document.getElementById("diagnosticoForm").reset();
+        } else {
+          alert("Erro ao enviar respostas. Tente novamente.");
+        }
+      })
+      .catch(error => {
+        alert("Falha ao enviar respostas. Verifique sua conexão.");
+      });
+    }
+  </script>
+</body>
+</html>
