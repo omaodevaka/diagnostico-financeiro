@@ -271,6 +271,7 @@
           <tr><td>Condomínio</td><td><input name="condominio" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Prestação do Imóvel (Financiamento)</td><td><input name="prestacao_imovel" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>IPTU</td><td><input name="iptu" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
+          <tr><td>Taxa de Incêndio</td><td><input name="iptu" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Energia Elétrica</td><td><input name="energia" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Água/Esgoto</td><td><input name="agua_esgoto" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
           <tr><td>Celular/Telefone fixo</td><td><input name="telefone_fixo" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('casa-table')" required></td></tr>
@@ -364,7 +365,7 @@
           <tr><td>Amazon Prime</td><td><input name="amazon_prime" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
           <tr><td>Disney+</td><td><input name="disney" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
           <tr><td>Globoplay</td><td><input name="globoplay" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
-          <tr><td>Spotify/Apple/Amazon/YouTube/Deezer</td><td><input name="musica_streaming" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
+          <tr><td>Spotify/Deezer/Outro</td><td><input name="musica_streaming" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('assinaturas-table')" required></td></tr>
         </table>
         <button type="button" class="add-row-btn" onclick="addRow('assinaturas-table')">+ Adicionar Assinatura</button>
         <div class="total-row">Total: R$ <span id="total-assinaturas">0,00</span></div>
@@ -390,7 +391,7 @@
         <div class="block-desc">Gastos com atividades físicas.</div>
         <table id="atividade-table">
           <tr><th>Item</th><th>Valor (R$)</th></tr>
-          <tr><td>Academia/Funcional/Crosfit/Lutas</td><td><input name="academia" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
+          <tr><td>Academia/Funcional/Crossfit/Lutas</td><td><input name="academia" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
           <tr><td>Personal</td><td><input name="personal" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
           <tr><td>Pilates</td><td><input name="pilates" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotal('atividade-table')" required></td></tr>
         </table>
@@ -428,8 +429,8 @@
                 <option value="">Selecione</option>
                 <option>Cartão de Crédito</option>
                 <option>Consignado</option>
+                <option>Consórcio</option>
                 <option>Empréstimo Bancário</option>
-                <option>Financiamento Imobiliário</option>
                 <option>Financiamento de Veículo</option>
                 <option>Outro</option>
               </select>
@@ -443,8 +444,8 @@
                 <option value="">Selecione</option>
                 <option>Cartão de Crédito</option>
                 <option>Consignado</option>
+                <option>Consórcio</option>
                 <option>Empréstimo Bancário</option>
-                <option>Financiamento Imobiliário</option>
                 <option>Financiamento de Veículo</option>
                 <option>Outro</option>
               </select>
@@ -458,8 +459,8 @@
                 <option value="">Selecione</option>
                 <option>Cartão de Crédito</option>
                 <option>Consignado</option>
+                <option>Consórcio</option>
                 <option>Empréstimo Bancário</option>
-                <option>Financiamento Imobiliário</option>
                 <option>Financiamento de Veículo</option>
                 <option>Outro</option>
               </select>
@@ -473,8 +474,8 @@
                 <option value="">Selecione</option>
                 <option>Cartão de Crédito</option>
                 <option>Consignado</option>
+                <option>Consórcio</option>
                 <option>Empréstimo Bancário</option>
-                <option>Financiamento Imobiliário</option>
                 <option>Financiamento de Veículo</option>
                 <option>Outro</option>
               </select>
@@ -488,8 +489,8 @@
                 <option value="">Selecione</option>
                 <option>Cartão de Crédito</option>
                 <option>Consignado</option>
+                <option>Consórcio</option>
                 <option>Empréstimo Bancário</option>
-                <option>Financiamento Imobiliário</option>
                 <option>Financiamento de Veículo</option>
                 <option>Outro</option>
               </select>
