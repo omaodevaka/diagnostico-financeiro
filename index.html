@@ -614,7 +614,7 @@
 
     function updateTotalDividas() {
       let total = 0, parcelas = 0;
-      for(let i=1;i<=3;i++) {
+      for(let i=1;i<=5;i++) {
         total += parseFloat(document.querySelector(`[name=divida_valor_total_${i}]`).value.replace(',','.') || 0);
         parcelas += parseFloat(document.querySelector(`[name=divida_parcela_${i}]`).value.replace(',','.') || 0);
       }
