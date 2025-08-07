@@ -423,24 +423,83 @@
         <table>
           <tr><th>Tipo</th><th>Valor Total (R$)</th><th>Valor Parcela Mensal (R$)</th></tr>
           <tr>
-            <td><input name="divida_tipo_1" type="text" placeholder="Ex: Empréstimo"></td>
+            <td>
+              <select name="divida_tipo_1">
+                <option value="">Selecione</option>
+                <option>Cartão de Crédito</option>
+                <option>Consignado</option>
+                <option>Empréstimo Bancário</option>
+                <option>Financiamento Imobiliário</option>
+                <option>Financiamento de Veículo</option>
+                <option>Outro</option>
+              </select>
+            </td>
             <td><input name="divida_valor_total_1" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
             <td><input name="divida_parcela_1" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
           </tr>
           <tr>
-            <td><input name="divida_tipo_2" type="text" placeholder="Ex: Cartão de Crédito"></td>
+            <td>
+              <select name="divida_tipo_2">
+                <option value="">Selecione</option>
+                <option>Cartão de Crédito</option>
+                <option>Consignado</option>
+                <option>Empréstimo Bancário</option>
+                <option>Financiamento Imobiliário</option>
+                <option>Financiamento de Veículo</option>
+                <option>Outro</option>
+              </select>
+            </td>
             <td><input name="divida_valor_total_2" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
             <td><input name="divida_parcela_2" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
           </tr>
           <tr>
-            <td><input name="divida_tipo_3" type="text" placeholder="Ex: Consignado"></td>
+            <td>
+              <select name="divida_tipo_3">
+                <option value="">Selecione</option>
+                <option>Cartão de Crédito</option>
+                <option>Consignado</option>
+                <option>Empréstimo Bancário</option>
+                <option>Financiamento Imobiliário</option>
+                <option>Financiamento de Veículo</option>
+                <option>Outro</option>
+              </select>
+            </td>
             <td><input name="divida_valor_total_3" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
             <td><input name="divida_parcela_3" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="divida_tipo_4">
+                <option value="">Selecione</option>
+                <option>Cartão de Crédito</option>
+                <option>Consignado</option>
+                <option>Empréstimo Bancário</option>
+                <option>Financiamento Imobiliário</option>
+                <option>Financiamento de Veículo</option>
+                <option>Outro</option>
+              </select>
+            </td>
+            <td><input name="divida_valor_total_4" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+            <td><input name="divida_parcela_4" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+          </tr>
+          <tr>
+            <td>
+              <select name="divida_tipo_5">
+                <option value="">Selecione</option>
+                <option>Cartão de Crédito</option>
+                <option>Consignado</option>
+                <option>Empréstimo Bancário</option>
+                <option>Financiamento Imobiliário</option>
+                <option>Financiamento de Veículo</option>
+                <option>Outro</option>
+              </select>
+            </td>
+            <td><input name="divida_valor_total_5" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
+            <td><input name="divida_parcela_5" type="number" min="0" step="0.01" class="valor-input" oninput="updateTotalDividas()" ></td>
           </tr>
         </table>
         <div class="total-row">Total Dívidas: R$ <span id="total-dividas">0,00</span> | Parcelas Mensais: R$ <span id="total-dividas-parcelas">0,00</span></div>
       </div>
-
       <!-- Despesas com Beleza -->
       <div class="block" id="bloco-beleza">
         <div class="block-title">Despesas com Beleza</div>
